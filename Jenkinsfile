@@ -37,22 +37,11 @@ pipeline {
             }
             }
 
-        stage('Deploy') {
-            // input {
-            //     message "Should we continue?"
-            //     ok "Yes, we should."
-            //     submitter "alice,bob"
-            //     // parameters {
-            //     //     string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
-            //     // }
-            // } 
-            when { 
-                environment name: 'DEPLOY_TO', value: 'PRODUCTION'
-            }
+        stage('Docker build') {
             steps {
                 script {
                 sh '''
-                    echo "Hello, this is deploy"
+                    docker build -t backend:1.0.0 .
                 '''
             }
             }
